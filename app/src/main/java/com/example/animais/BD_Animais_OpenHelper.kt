@@ -12,10 +12,13 @@ class BD_Animais_OpenHelper (
 
 
 
-    override fun onCreate(p0: SQLiteDatabase?) {
-
+    override fun onCreate(db: SQLiteDatabase?) {
+        requireNotNull(db)
+        TabelaAnimais(db!!).cria()
+        TabelaDonos(db!!).cria()
     }
 
     override fun onUpgrade(p0: SQLiteDatabase?, p1: Int, p2: Int) {
     }
 }
+
