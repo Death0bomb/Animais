@@ -20,5 +20,9 @@ class BD_Animais_OpenHelper (
 
     override fun onUpgrade(p0: SQLiteDatabase?, p1: Int, p2: Int) {
     }
+
+    companion object{
+        const val NOME_BASE_DADOS = "Animais.db"
+    }
 }
 
