@@ -3,12 +3,24 @@ package com.example.animais
 import android.database.sqlite.SQLiteDatabase
 import android.provider.BaseColumns
 
-class TabelaDonos(db: SQLiteDatabase) : TabelaBD ( db, NOME_TABELA) {
+class TabelaDonos(db: SQLiteDatabase) : TabelaBD(db, NOME_TABELA) {
     override fun cria() {
-        db.execSQL("CREATE TABLE $NOME_TABELA (nome TEXT NOT NULL, numero TEXT, id_categoria INTEGER NOT NULL, FOREIGN KEY(id_animais) REFERENCES ${TabelaAnimais.NOME_TABElA}(${BaseColumns._ID}) ON DELETE RESTRICT)")
+        db.execSQL("CREATE TABLE $NOME_TABELA($CHAVE_TABELA,$CAMPO_NOME TEXT NOT NULL,$CAMPO_EMAIL TEXT NOT NULL, $CAMPO_TELEFONE TEXT NOT NULL,$CAMPO_IDADE INT NOT NULL,$CAMPO_CIDADE TEXT NOT NULL,$CAMPO_ESTADO TEXT NOT NULL,$CAMPO_PAIS TEXT NOT NULL)")
     }
-    companion object {
-        const val NOME_TABElA = "Animais"
+
+    companion object{
+        const val NOME_TABELA = "Brands"
+        const val CAMPO_NOME = "nome"
+        const val CAMPO_EMAIL = "email"
+        const val CAMPO_TELEFONE = "telefone"
+        const val CAMPO_IDADE = "idade"
+        const val CAMPO_CIDADE = "cidade"
+        const val CAMPO_ESTADO = "estado"
+        const val CAMPO_PAIS = "país"
+
+        val CAMPOS = arrayOf(BaseColumns._ID, CAMPO_NOME, CAMPO_EMAIL, CAMPO_TELEFONE, CAMPO_IDADE,
+            CAMPO_CIDADE, CAMPO_ESTADO, CAMPO_PAIS)
+
+
     }
 }
-
