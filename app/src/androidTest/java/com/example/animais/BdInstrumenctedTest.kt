@@ -170,7 +170,7 @@ class BDInstrumentedTest {
         insereDono(db,dono)
 
         val animal = Animal("Porca","Porquinho","20",-1,-1,1)
-
+        dono.nome = "Puta"
         val linhasAlteradas =TabelaAnimais(db).altera( animal.toContentValues(), "${BaseColumns._ID}=?", arrayOf(animal.id.toString()))
 
         assertEquals(1,linhasAlteradas)
@@ -205,10 +205,10 @@ class BDInstrumentedTest {
         insereDono(db,dono)
 
 
-        val linhasEliminadas = TabelaDonos(db).elimina(
+        val linhasEliminadas = TabelaAnimais(db).elimina(
             "${BaseColumns._ID}=?", arrayOf(animal.id.toString()),
         )
 
-        assertEquals(1,linhasAlteradas)
+        assertEquals(1,linhasEliminadas)
     }
 }
