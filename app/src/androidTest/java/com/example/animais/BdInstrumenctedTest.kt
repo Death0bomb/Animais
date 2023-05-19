@@ -166,17 +166,17 @@ class BDInstrumentedTest {
         fun consegueAlterarDonos(){
         val db = getWritableDatabase()
 
-        val dono = Dono("Paulo","...","...",-1,"...","...","...")
-        insereDono(db,dono)
+        val dono = Dono("...", "...", "....",-1,"....","....","....")
+        insereDono(db, dono)
 
-        val animal = Animal("Porca","Porquinho","20",-1,-1,1)
-        dono.nome = "Puta"
-        val linhasAlteradas =TabelaAnimais(db).altera( animal.toContentValues(), "${BaseColumns._ID}=?", arrayOf(animal.id.toString()))
+        dono.nome="Manel"
+        val registosAlterados = TabelaDonos(db).altera(dono.toContentValues(),"${BaseColumns._ID}=?",
+            arrayOf(dono.id.toString())
+        )
 
-        assertEquals(1,linhasAlteradas)
-
-
+        assertEquals(1,registosAlterados)
         }
+
 
     @Test
         fun consegueEliminarDonos(){
