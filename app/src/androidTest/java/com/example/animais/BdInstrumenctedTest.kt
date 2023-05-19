@@ -74,7 +74,7 @@ class BDInstrumentedTest {
     }
 
     @Test
-    fun consegueLerBrands(){
+    fun consegueLerDonos(){
         val db = getWritableDatabase()
 
         val dono1 = Dono("Pedro","sousa-10-98@hotmail.com","932571468",23,"Guarda","Guarda","Portugal")
@@ -109,7 +109,7 @@ class BDInstrumentedTest {
 
     @Test
 
-    fun consegueLerInstrumentos(){
+    fun consegueLeAnimal(){
 
         val db = getWritableDatabase()
         val dono = Dono("Pedro","pedropedropedropedro@hotmail.com","966659203",5,"VALHEIM","NORTHUMBRIA","ENGLAND")
@@ -146,5 +146,69 @@ class BDInstrumentedTest {
 
 
     }
+    fun conseguealterarDono()
+    {
+        val db = getWritableDatabase()
 
+        val dono = Dono("...","...","...",-1,"...","...","...")
+        insereDono(db,dono)
+
+        dono.cidade = "Guarda"
+
+        val linhasAlteradas = TabelaDonos(db).altera(
+            dono.toContentValues(),"${BaseColumns._ID}=?", arrayOf(dono.id.toString()),
+        )
+
+        assertEquals(1,linhasAlteradas)
+    }
+
+    @Test
+        fun consegueAlterarDonos(){
+        val db = getWritableDatabase()
+
+        val dono = Dono("Paulo","...","...",-1,"...","...","...")
+        insereDono(db,dono)
+
+        val animal = Animal("Porca","Porquinho","20",-1,-1,1)
+
+        val linhasAlteradas =TabelaAnimais(db).altera( animal.toContentValues(), "${BaseColumns._ID}=?", arrayOf(animal.id.toString()))
+
+        assertEquals(1,linhasAlteradas)
+
+
+        }
+
+    @Test
+        fun consegueEliminarDonos(){
+        val db = getWritableDatabase()
+
+        val dono = Dono("...","...","...",-1,"...","...","...")
+        insereDono(db,dono)
+
+        val linhasEliminadas = TabelaDonos(db).elimina(
+            "${BaseColumns._ID}=?", arrayOf(dono.id.toString()),
+        )
+
+        assertEquals(1,linhasEliminadas)
+        }
+
+    @Test
+
+    fun consegueEliminarAnimais()
+    {
+        val db = getWritableDatabase()
+
+        val animal = Animal("...","...","...",-1,-1,1)
+        insereAnimais(db,animal)
+
+        val dono = Dono("...","...","...",-1,"...","...","...")
+        insereDono(db,dono)
+
+
+        val linhasEliminadas = TabelaDonos(db).elimina(
+            "${BaseColumns._ID}=?", arrayOf(animal.id.toString()),
+        )
+
+        assertEquals(1,linhasAlteradas)
+    }
 }
