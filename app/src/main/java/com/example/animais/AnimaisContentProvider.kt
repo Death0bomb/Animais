@@ -28,19 +28,19 @@ class AnimaisContentProvider: ContentProvider() {
         val endereco = uriMatcher().match(uri)
 
 
-        val tabela = when (endereco){
-            URI_ANIMAIS,URI_ANIMAIS_ID -> TabelaAnimais(db)
-            URI_DONOS,URI_DONOS_ID -> TabelaDonos(db)
+        val tabela = when (endereco) {
+            URI_ANIMAIS, URI_ANIMAIS_ID -> TabelaAnimais(db)
+            URI_DONOS, URI_DONOS_ID -> TabelaDonos(db)
             else -> null
         }
 
-        val (selecao,argSel) = when(endereco){
-            URI_DONOS_ID, URI_ANIMAIS_ID ->Pair("${BaseColumns._ID}=?", arrayOf(id))
-            else -> Pair(selection,selectionArgs)
+        val (selecao, argSel) = when (endereco) {
+            URI_DONOS_ID, URI_ANIMAIS_ID -> Pair("${BaseColumns._ID}=?", arrayOf(id))
+            else -> Pair(selection, selectionArgs)
         }
 
         return tabela?.consulta(
-            projection as Array<String>,selecao,argSel as Array<String>,null,null,sortOrder
+            projection as Array<String>, selecao, argSel as Array<String>, null, null, sortOrder
         )
     }
 
@@ -48,9 +48,26 @@ class AnimaisContentProvider: ContentProvider() {
         TODO("Not yet implemented")
     }
 
-    override fun insert(p0: Uri, p1: ContentValues?): Uri? {
-        TODO("Not yet implemented")
+    override fun insert(uri: Uri, values: ContentValues?): Uri? {
+        val db = dbOpenHelper!!.writableDatabase
+        val id = uri.lastPathSegment
+        val endereco = uriMatcher().match(uri)
+
+
+        val tabela = when (endereco) {
+            URI_ANIMAIS -> TabelaAnimais(db)
+            URI_DONOS -> TabelaDonos(db)
+            else -> return null
+        }
+
+        val Id = tabela.insere(values!!)
+        if (Id==-1L){
+            return null
+        }
+
+        return Uri.withAppendedPath(uri, Id.toString())
     }
+
 
     override fun delete(p0: Uri, p1: String?, p2: Array<out String>?): Int {
         TODO("Not yet implemented")
