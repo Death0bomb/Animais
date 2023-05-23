@@ -6,6 +6,7 @@ import android.content.UriMatcher
 import android.database.Cursor
 import android.net.Uri
 import android.provider.BaseColumns
+import java.util.*
 
 class AnimaisContentProvider: ContentProvider() {
     private var dbOpenHelper: BD_Animais_OpenHelper? = null
@@ -44,8 +45,16 @@ class AnimaisContentProvider: ContentProvider() {
         )
     }
 
-    override fun getType(p0: Uri): String? {
-        TODO("Not yet implemented")
+    override fun getType(uri: Uri): String? {
+        val endereco = uriMatcher().match(uri)
+        return when (endereco){
+                URI_DONOS_ID ->"vnd.android.cursor.item/$DONOS"
+                URI_DONOS ->"vnd.android.cursor.dir/$DONOS"
+                URI_ANIMAIS -> "vnd.android.cursor.dir/$ANIMAIS"
+                URI_ANIMAIS_ID -> "vnd.android.cursor.item/$ANIMAIS"
+                else -> null
+
+        }
     }
 
     override fun insert(uri: Uri, values: ContentValues?): Uri? {
@@ -61,7 +70,7 @@ class AnimaisContentProvider: ContentProvider() {
         }
 
         val Id = tabela.insere(values!!)
-        if (Id==-1L){
+        if (Id == -1L) {
             return null
         }
 
@@ -69,14 +78,38 @@ class AnimaisContentProvider: ContentProvider() {
     }
 
 
-    override fun delete(p0: Uri, p1: String?, p2: Array<out String>?): Int {
-        TODO("Not yet implemented")
+    override fun delete(uri: Uri, selection: String?, selectionArgs: Array<out String>?): Int {
+        val db = dbOpenHelper!!.writableDatabase
+        val id = uri.lastPathSegment!!
+        val endereco = uriMatcher().match(uri)
+
+
+        val tabela = when (endereco) {
+            URI_ANIMAIS_ID -> TabelaAnimais(db)
+            URI_DONOS_ID -> TabelaDonos(db)
+            else -> return 0
+        }
+        return tabela.elimina("${BaseColumns._ID}=?", arrayOf(id))
     }
 
-    override fun update(p0: Uri, p1: ContentValues?, p2: String?, p3: Array<out String>?): Int {
-        TODO("Not yet implemented")
-    }
+    override fun update(
+        uri: Uri,
+        values: ContentValues?,
+        selection: String?,
+        selectionArgs: Array<out String>?
+    ): Int {
+        val db = dbOpenHelper!!.writableDatabase
+        val id = uri.lastPathSegment!!
+        val endereco = uriMatcher().match(uri)
 
+
+        val tabela = when (endereco) {
+            URI_ANIMAIS_ID -> TabelaAnimais(db)
+            URI_DONOS_ID -> TabelaDonos(db)
+            else -> return 0
+        }
+        return tabela.altera(values!!, "${BaseColumns._ID}=?", arrayOf(id))
+    }
     companion object{
         private const val AUTORIDADE = "com.example.animais"
 
@@ -94,6 +127,5 @@ class AnimaisContentProvider: ContentProvider() {
             addURI(AUTORIDADE, ANIMAIS, URI_ANIMAIS)
             addURI(AUTORIDADE, "$ANIMAIS/#", URI_ANIMAIS_ID)
         }
-        //content://com.example.animais/categorias
     }
 }
