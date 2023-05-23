@@ -5,6 +5,7 @@ import android.content.ContentValues
 import android.content.UriMatcher
 import android.database.Cursor
 import android.net.Uri
+import android.provider.BaseColumns
 
 class AnimaisContentProvider: ContentProvider() {
     private var dbOpenHelper: BD_Animais_OpenHelper? = null
@@ -16,13 +17,31 @@ class AnimaisContentProvider: ContentProvider() {
     }
 
     override fun query(
-        p0: Uri,
-        p1: Array<out String>?,
-        p2: String?,
-        p3: Array<out String>?,
-        p4: String?
+        uri: Uri,
+        projection: Array<out String>?,
+        selection: String?,
+        selectionArgs: Array<out String>?,
+        sortOrder: String?
     ): Cursor? {
-        TODO("Not yet implemented")
+        val db = dbOpenHelper!!.readableDatabase
+        val id = uri.lastPathSegment
+        val endereco = uriMatcher().match(uri)
+
+
+        val tabela = when (endereco){
+            URI_ANIMAIS,URI_ANIMAIS_ID -> TabelaAnimais(db)
+            URI_DONOS,URI_DONOS_ID -> TabelaDonos(db)
+            else -> null
+        }
+
+        val (selecao,argSel) = when(endereco){
+            URI_DONOS_ID, URI_ANIMAIS_ID ->Pair("${BaseColumns._ID}=?", arrayOf(id))
+            else -> Pair(selection,selectionArgs)
+        }
+
+        return tabela?.consulta(
+            projection as Array<String>,selecao,argSel as Array<String>,null,null,sortOrder
+        )
     }
 
     override fun getType(p0: Uri): String? {
@@ -48,11 +67,16 @@ class AnimaisContentProvider: ContentProvider() {
         const val ANIMAIS = "animais"
 
         private const val URI_DONOS =100
+        private const val URI_DONOS_ID = 101
         private const val URI_ANIMAIS = 200
+        private const val URI_ANIMAIS_ID=201
 
         fun uriMatcher() = UriMatcher(UriMatcher.NO_MATCH).apply {
             addURI(AUTORIDADE, DONOS, URI_DONOS)
+            addURI(AUTORIDADE, "$DONOS/#", URI_DONOS_ID)
             addURI(AUTORIDADE, ANIMAIS, URI_ANIMAIS)
+            addURI(AUTORIDADE, "$ANIMAIS/#", URI_ANIMAIS_ID)
         }
+        //content://com.example.animais/categorias
     }
 }
