@@ -3,10 +3,13 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/Users/sousa/AndroidStudioProjects/Animais/app/src/main/res/layout/activity_main.xml" value="0.264" />
+        <entry key="..\:/Users/sousa/AndroidStudioProjects/Animais/app/src/main/res/layout/activity_main.xml" value="0.15384615384615385" />
         <entry key="..\:/Users/sousa/AndroidStudioProjects/Animais/app/src/main/res/layout/content_main.xml" value="0.25" />
         <entry key="..\:/Users/sousa/AndroidStudioProjects/Animais/app/src/main/res/layout/fragment_first.xml" value="0.25" />
+        <entry key="..\:/Users/sousa/AndroidStudioProjects/Animais/app/src/main/res/layout/fragment_lista_de_animais.xml" value="0.25" />
         <entry key="..\:/Users/sousa/AndroidStudioProjects/Animais/app/src/main/res/layout/fragment_second.xml" value="0.25" />
+        <entry key="..\:/Users/sousa/AndroidStudioProjects/Animais/app/src/main/res/layout/fragmento_menu_principal.xml" value="0.25" />
+        <entry key="..\:/Users/sousa/AndroidStudioProjects/Animais/app/src/main/res/layout/fragmento_sobre.xml" value="0.25" />
         <entry key="..\:/Users/sousa/AndroidStudioProjects/Animais/app/src/main/res/layout/sobre_Framento.xml" value="0.17527173913043478" />
       </map>
     </option>

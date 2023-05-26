@@ -14,6 +14,9 @@
         <action
             android:id="@+id/action_FirstFragment_to_SecondFragment"
             app:destination="@id/SobreFragmento" />
+        <action
+            android:id="@+id/action_MenuPrincipalFragmento_to_listaDeAnimais"
+            app:destination="@id/listaDeAnimais" />
     </fragment>
     <fragment
         android:id="@+id/SobreFragmento"
@@ -25,4 +28,9 @@
             android:id="@+id/action_SecondFragment_to_FirstFragment"
             app:destination="@id/MenuPrincipalFragmento" />
     </fragment>
+    <fragment
+        android:id="@+id/listaDeAnimais"
+        android:name="com.example.animais.ListaDeAnimais"
+        android:label="fragment_lista_de_animais"
+        tools:layout="@layout/fragment_lista_de_animais" />
 </navigation>
