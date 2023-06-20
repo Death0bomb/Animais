@@ -5,7 +5,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 
-class AdapterAnimais : RecyclerView.Adapter<AdapterAnimais.ViewHolderAnimal>() {
+class AdapterAnimais(val fragment: ListaDeAnimais) : RecyclerView.Adapter<AdapterAnimais.ViewHolderAnimal>() {
     var cursor: Cursor? = null
         set(value) {
             field = value
@@ -21,7 +21,9 @@ class AdapterAnimais : RecyclerView.Adapter<AdapterAnimais.ViewHolderAnimal>() {
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolderAnimal {
-        TODO("Not yet implemented")
+        return ViewHolderAnimal(
+            fragment.layoutInflater.inflate(R.layout.itemanimal, parent, false)
+        )
     }
 
     override fun getItemCount(): Int {
