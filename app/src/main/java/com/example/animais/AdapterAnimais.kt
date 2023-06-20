@@ -1,10 +1,17 @@
 package com.example.animais
 
+import android.database.Cursor
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 
 class AdapterAnimais : RecyclerView.Adapter<AdapterAnimais.ViewHolderAnimal>() {
+    var cursor: Cursor? = null
+        set(value) {
+            field = value
+            notifyDataSetChanged()
+        }
+
     inner class ViewHolderAnimal(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
     }
@@ -18,7 +25,7 @@ class AdapterAnimais : RecyclerView.Adapter<AdapterAnimais.ViewHolderAnimal>() {
     }
 
     override fun getItemCount(): Int {
-        TODO("Not yet implemented")
+        return cursor?.count ?: 0
     }
 
 }

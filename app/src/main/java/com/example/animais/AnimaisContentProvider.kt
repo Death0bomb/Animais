@@ -113,13 +113,19 @@ class AnimaisContentProvider: ContentProvider() {
     companion object{
         private const val AUTORIDADE = "com.example.animais"
 
-        const val DONOS = "donos"
-        const val ANIMAIS = "animais"
+        private const val DONOS = "donos"
+        private const val ANIMAIS = "animais"
 
         private const val URI_DONOS =100
         private const val URI_DONOS_ID = 101
         private const val URI_ANIMAIS = 200
         private const val URI_ANIMAIS_ID=201
+
+        private val ENDERECO_BASE = Uri.parse("content://$AUTORIDADE")
+
+        val ENDERECO_DONOS = Uri.withAppendedPath(ENDERECO_BASE, DONOS)
+        val ENDERECO_ANIMAIS = Uri.withAppendedPath(ENDERECO_BASE, ANIMAIS)
+
 
         fun uriMatcher() = UriMatcher(UriMatcher.NO_MATCH).apply {
             addURI(AUTORIDADE, DONOS, URI_DONOS)

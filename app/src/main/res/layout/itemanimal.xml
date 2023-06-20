@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="8dp">
+
+    <TextView
+        android:id="@+id/textViewNome"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="8dp"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+        android:textColor="@color/design_default_color_primary"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="Manel" />
+
+    <TextView
+        android:id="@+id/textViewRaca"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:paddingBottom="8dp"
+        app:layout_constraintStart_toStartOf="@+id/textViewNome"
+        app:layout_constraintTop_toBottomOf="@+id/textViewNome"
+        tools:text="Pastor Alemão" />
+    <TextView
+        android:id="@+id/textViewTamanho"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:paddingBottom="8dp"
+        app:layout_constraintStart_toStartOf="@+id/textViewRaca"
+        app:layout_constraintTop_toBottomOf="@+id/textViewRaca"
+        tools:text="105 cm" />
+    <TextView
+        android:id="@+id/textViewPeso"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:paddingBottom="8dp"
+        app:layout_constraintStart_toStartOf="@+id/textViewTamanho"
+        app:layout_constraintTop_toBottomOf="@+id/textViewTamanho"
+        tools:text="30Kg" />
+    <TextView
+        android:id="@+id/textViewIdade"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:paddingBottom="8dp"
+        app:layout_constraintStart_toStartOf="@+id/textViewPeso"
+        app:layout_constraintTop_toBottomOf="@+id/textViewPeso"
+        tools:text="5 Anos" />
+</androidx.constraintlayout.widget.ConstraintLayout>
