@@ -15,14 +15,9 @@ import androidx.core.content.ContentProviderCompat
 import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.animais.databinding.FragmentListaDeAnimaisBinding
-import com.example.animais.databinding.FragmentoSobreBinding
 
 private const val ID_LOADER_Animais = 0
-private val adapterAnimais1: AdapterAnimais
-    get() {
-        val adapterAnimais = AdapterAnimais()
-        return adapterAnimais
-    }
+
 
 class ListaDeAnimais : Fragment(), LoaderManager.LoaderCallbacks<Cursor> {
 
@@ -45,12 +40,12 @@ class ListaDeAnimais : Fragment(), LoaderManager.LoaderCallbacks<Cursor> {
         super.onDestroyView()
         _binding = null
     }
-    private val adapterAnimal = AdapterAnimais()
+    private var adapterAnimais: AdapterAnimais? = null
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        val adapterAnimais = AdapterAnimais()
+        adapterAnimais = AdapterAnimais(this)
+        val adapterAnimais = AdapterAnimais(this)
         binding.RecyclerViewAnimais.adapter = adapterAnimais
         binding.RecyclerViewAnimais.layoutManager = LinearLayoutManager(requireContext())
 
@@ -58,8 +53,6 @@ class ListaDeAnimais : Fragment(), LoaderManager.LoaderCallbacks<Cursor> {
         loader.initLoader(ID_LOADER_Animais, null, this)
     }
 
-    companion object {
-    }
 
     override fun onCreateLoader(id: Int, args: Bundle?): Loader<Cursor> {
         return CursorLoader(
@@ -72,10 +65,10 @@ class ListaDeAnimais : Fragment(), LoaderManager.LoaderCallbacks<Cursor> {
     }
 
     override fun onLoadFinished(loader: Loader<Cursor>, data: Cursor?) {
-        adapterAnimal.cursor = data
+        adapterAnimais!!.cursor = data
     }
 
     override fun onLoaderReset(loader: Loader<Cursor>) {
-        adapterAnimal.cursor = null
+        adapterAnimais!!.cursor = null
     }
 }
