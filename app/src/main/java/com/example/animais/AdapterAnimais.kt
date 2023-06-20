@@ -12,12 +12,14 @@ class AdapterAnimais(val fragment: ListaDeAnimais) : RecyclerView.Adapter<Adapte
             notifyDataSetChanged()
         }
 
-    inner class ViewHolderAnimal(itemView: View) : RecyclerView.ViewHolder(itemView) {
+    inner class ViewHolderAnimal(contentor: View) : RecyclerView.ViewHolder(contentor) {
+        internal var animal: Animal? = null
 
     }
 
     override fun onBindViewHolder(holder: ViewHolderAnimal, position: Int) {
-        TODO("Not yet implemented")
+        cursor!!.move(position)
+        holder.animal = Animal.fromCursor(cursor!!)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolderAnimal {
