@@ -20,6 +20,11 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+            <provider
+            android:authorities="pt.ipg.livros"
+            android:name=".AnimaisContentProvider"
+            android:exported="false"
+            />
     </application>
 
 </manifest>

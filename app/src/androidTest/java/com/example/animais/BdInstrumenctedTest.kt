@@ -23,7 +23,7 @@ class BDInstrumentedTest {
 
     @Before
     fun apagaBD(){
-        getAppContext().deleteDatabase(BD_Animais_OpenHelper.NOME_BASE_DADOS)
+        //getAppContext().deleteDatabase(BD_Animais_OpenHelper.NOME_BASE_DADOS)
     }
 
     @Test
