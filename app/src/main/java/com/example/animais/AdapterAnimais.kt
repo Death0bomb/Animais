@@ -5,6 +5,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import android.widget.TextView
+import android.widget.Toast
 
 class AdapterAnimais(val fragment: ListaDeAnimais) : RecyclerView.Adapter<AdapterAnimais.ViewHolderAnimal>() {
     var cursor: Cursor? = null
@@ -20,6 +21,14 @@ class AdapterAnimais(val fragment: ListaDeAnimais) : RecyclerView.Adapter<Adapte
         private val textViewPeso = contentor.findViewById<TextView>(R.id.textViewPeso)
         private val textViewTamanho = contentor.findViewById<TextView>(R.id.textViewTamanho)
 
+
+        init {
+            contentor.setOnClickListener {
+                viewHolderSeleccionado?.desSeleciona()
+                seleciona()
+            }
+        }
+
         internal var animal: Animal? = null
             set(value) {
                 field = value
@@ -30,10 +39,21 @@ class AdapterAnimais(val fragment: ListaDeAnimais) : RecyclerView.Adapter<Adapte
                 textViewTamanho.text = animal?.tamanho ?: ""
             }
 
+        fun seleciona() {
+            viewHolderSeleccionado = this
+            fragment.animalSelecionado = animal
+            itemView.setBackgroundResource(R.color.item_selecionado)
+        }
+
+        fun desSeleciona() {
+            itemView.setBackgroundResource(android.R.color.white)
+        }
+
     }
+    private var viewHolderSeleccionado : ViewHolderAnimal? = null
 
     override fun onBindViewHolder(holder: ViewHolderAnimal, position: Int) {
-        cursor!!.move(position)
+        cursor!!.moveToPosition(position)
         holder.animal = Animal.fromCursor(cursor!!)
     }
 

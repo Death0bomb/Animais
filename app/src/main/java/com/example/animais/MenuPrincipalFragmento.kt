@@ -39,6 +39,10 @@ class MenuPrincipalFragmento : Fragment() {
         binding.buttonFirst3.setOnClickListener{
             findNavController().navigate(R.id.action_MenuPrincipalFragmento_to_listaDeAnimais)
         }
+
+        val activity = activity as MainActivity
+        activity.fragment = this
+        activity.idMenuAtual = R.menu.menu_main
     }
 
     override fun onDestroyView() {

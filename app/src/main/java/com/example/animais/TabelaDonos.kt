@@ -17,6 +17,7 @@ class TabelaDonos(db: SQLiteDatabase) : TabelaBD(db, NOME_TABELA) {
         const val CAMPO_CIDADE = "cidade"
         const val CAMPO_ESTADO = "estado"
         const val CAMPO_PAIS = "país"
+        const val CAMPO_ID = "$NOME_TABELA.${BaseColumns._ID}"
 
         val CAMPOS = arrayOf(BaseColumns._ID, CAMPO_NOME, CAMPO_EMAIL, CAMPO_TELEFONE, CAMPO_IDADE,
             CAMPO_CIDADE, CAMPO_ESTADO, CAMPO_PAIS)

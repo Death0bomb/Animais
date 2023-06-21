@@ -16,6 +16,7 @@ import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.animais.databinding.FragmentListaDeAnimaisBinding
 
+
 private const val ID_LOADER_Animais = 0
 
 
@@ -27,6 +28,16 @@ class ListaDeAnimais : Fragment(), LoaderManager.LoaderCallbacks<Cursor> {
     // onDestroyView.
     private val binding get() = _binding!!
 
+    var animalSelecionado : Animal? = null
+        set(value) {
+            field = value
+
+            val mostrarEliminarAlterar = (value != null)
+
+            val activity = activity as MainActivity
+            activity.mostraOpcaoMenu(R.id.action_editar, mostrarEliminarAlterar)
+            activity.mostraOpcaoMenu(R.id.action_eliminar, mostrarEliminarAlterar)
+        }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -49,8 +60,14 @@ class ListaDeAnimais : Fragment(), LoaderManager.LoaderCallbacks<Cursor> {
         binding.RecyclerViewAnimais.adapter = adapterAnimais
         binding.RecyclerViewAnimais.layoutManager = LinearLayoutManager(requireContext())
 
+
+
         val loader = LoaderManager.getInstance(this)
         loader.initLoader(ID_LOADER_Animais, null, this)
+
+        val activity = activity as MainActivity
+        activity.fragment = this
+        activity.idMenuAtual = R.menu.menu_lista_animais
     }
 
 
@@ -70,5 +87,35 @@ class ListaDeAnimais : Fragment(), LoaderManager.LoaderCallbacks<Cursor> {
 
     override fun onLoaderReset(loader: Loader<Cursor>) {
         adapterAnimais!!.cursor = null
+    }
+
+    fun processaOpcaoMenu(item: MenuItem) : Boolean {
+        return when (item.itemId) {
+            R.id.action_adicionar -> {
+                adicionaAnimal()
+                true
+            }
+            R.id.action_editar -> {
+                editarAnimal()
+                true
+            }
+            R.id.action_eliminar -> {
+                eliminarAnimal()
+                true
+            }
+            else -> false
+        }
+    }
+
+    private fun eliminarAnimal() {
+
+    }
+
+    private fun editarAnimal() {
+
+    }
+
+    private fun adicionaAnimal() {
+
     }
 }

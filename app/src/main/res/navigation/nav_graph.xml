@@ -22,11 +22,23 @@
         android:id="@+id/SobreFragmento"
         android:name="com.example.animais.SobreFragmento"
         android:label="@string/sobre_fragmento_label"
-        tools:layout="@layout/sobre_Framento">
+        tools:layout="@layout/fragmento_sobre">
 
         <action
             android:id="@+id/action_SecondFragment_to_FirstFragment"
             app:destination="@id/MenuPrincipalFragmento" />
+        <action
+            android:id="@+id/action_ListaLivrosFragment_to_novoLivroFragment"
+            app:destination="@id/novoLivroFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/novoLivroFragment"
+        android:name="com.example.animais.NovoAnimalFragmento"
+        android:label="@string/novo_animal_label"
+        tools:layout="@layout/fragmento_novo_animal">
+        <action
+            android:id="@+id/action_novoLivroFragment_to_ListaLivrosFragment"
+            app:destination="@id/listaDeAnimais" />
     </fragment>
     <fragment
         android:id="@+id/listaDeAnimais"
